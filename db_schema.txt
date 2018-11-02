@@ -1,10 +1,11 @@
 ﻿////////////////////////////TABLE CREATE QUERY////////////////////////////////
 CREATE TABLE HP_INVITATION ( 
-  invitation_id varchar(32) NOT NULL,
+  invitation_id varchar(64) NOT NULL,
   password varchar(32) NOT NULL,
   name varchar(32) NOT NULL,
   subject varchar(256) NOT NULL,
   contents varchar(5000) NOT NULL,
+  date_regist varchar(32),
   date_start varchar(32),
   date_end varchar(32),
   image varchar(5),
@@ -15,7 +16,7 @@ CREATE TABLE HP_INVITATION (
 
 CREATE TABLE HP_COMMENT ( 
   comment_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  invitation_id varchar(32) NOT NULL,
+  invitation_id varchar(64) NOT NULL,
   password varchar(32) NOT NULL,
   name varchar(32) NOT NULL,
   contents varchar(500) NOT NULL,
@@ -26,7 +27,7 @@ CREATE TABLE HP_COMMENT (
 
 CREATE TABLE HP_PARTICIPANT ( 
   participant_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  invitation_id varchar(32) NOT NULL,
+  invitation_id varchar(64) NOT NULL,
   name varchar(32) NOT NULL,
   contact varchar(64),
   date varchar(32) NOT NULL,
