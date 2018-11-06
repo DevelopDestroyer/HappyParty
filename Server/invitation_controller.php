@@ -133,7 +133,7 @@
 		return;
 	  }
 
-	  $sql = "UPDATE HP_INVITATION SET name = '".mysql_real_escape_string($_POST['name'])."', subject = '".mysql_real_escape_string($_POST['subject'])."', contents = '".mysql_real_escape_string($_POST['contents'])."', date_start = '".mysql_real_escape_string($_POST['date_start'])."',  date_end = '".mysql_real_escape_string($_POST['date_end'])."', font_color = '".mysql_real_escape_string($_POST['font_color'])."', status = '".mysql_real_escape_string($_POST['status'])."'";
+	  $sql = "UPDATE HP_INVITATION SET name = '".mysql_real_escape_string($_POST['name'])."', subject = '".mysql_real_escape_string($_POST['subject'])."', contents = '".mysql_real_escape_string($_POST['contents'])."', date_start = '".mysql_real_escape_string($_POST['date_start'])."',  date_end = '".mysql_real_escape_string($_POST['date_end'])."', font_color = '".mysql_real_escape_string($_POST['font_color'])."', status = '".mysql_real_escape_string($_POST['status'])."' WHERE invitation_id = '".mysql_real_escape_string($_POST['invitation_id'])."'";
 	  $result = mysql_query($sql, $connect);
 	  echo "{result:\"success\", code: \"200\", msg:\"수정 완료\"}";	  
 	
