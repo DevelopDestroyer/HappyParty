@@ -62,7 +62,7 @@
       $MAX_LENGTH_SIZE_name < mb_strlen($_POST['name'], "UTF-8") ||
       $MAX_LENGTH_SIZE_subject < mb_strlen($_POST['subject'], "UTF-8") ||
       $MAX_LENGTH_SIZE_contents < mb_strlen($_POST['contents'], "UTF-8") ||
-      $MAX_LENGTH_SIZE_date_regist < mb_strlen($_POST['date_regist'], "UTF-8") ||
+      //$MAX_LENGTH_SIZE_date_regist < mb_strlen($_POST['date_regist'], "UTF-8") ||
       $MAX_LENGTH_SIZE_date_start < mb_strlen($_POST['date_start'], "UTF-8") ||
       $MAX_LENGTH_SIZE_date_end < mb_strlen($_POST['date_end'], "UTF-8") ||
       $MAX_LENGTH_SIZE_image < mb_strlen($_POST['image'], "UTF-8") ||
@@ -73,7 +73,7 @@
       return;
     }
     //mysql_real_escape_string();
-    $sql = "INSERT INTO HP_INVITATION VALUES ('".mysql_real_escape_string($_POST['invitation_id'])."', '".mysql_real_escape_string($_POST['password'])."', '".mysql_real_escape_string($_POST['name'])."', '".mysql_real_escape_string($_POST['subject'])."', '".mysql_real_escape_string($_POST['contents'])."', '".mysql_real_escape_string($_POST['date_regist'])."', '".mysql_real_escape_string($_POST['date_start'])."', '".mysql_real_escape_string($_POST['date_end'])."', '".mysql_real_escape_string($_POST['image'])."', '".mysql_real_escape_string($_POST['font_color'])."', '".mysql_real_escape_string($_POST['status'])."')";
+    $sql = "INSERT INTO HP_INVITATION VALUES ('".mysql_real_escape_string($_POST['invitation_id'])."', '".mysql_real_escape_string($_POST['password'])."', '".mysql_real_escape_string($_POST['name'])."', '".mysql_real_escape_string($_POST['subject'])."', '".mysql_real_escape_string($_POST['contents'])."', '".date('Y-m-d H:i:s', time())."', '".mysql_real_escape_string($_POST['date_start'])."', '".mysql_real_escape_string($_POST['date_end'])."', '".mysql_real_escape_string($_POST['image'])."', '".mysql_real_escape_string($_POST['font_color'])."', '".mysql_real_escape_string($_POST['status'])."')";
     $result = mysql_query($sql, $connect);
     echo "{result:\"success\", code: \"200\", msg:\"입력 완료\"}";
 /*
@@ -88,8 +88,8 @@
   * CREATE - END
   *
   */
-  
-  
+
+
   else if($_GET['order'] == "modify"){
 	  $isExistItem = false;
 	  $invitation_id_from_DB = null;
@@ -98,18 +98,18 @@
       $sql = "SELECT * FROM HP_INVITATION WHERE invitation_id = '".mysql_real_escape_string($_POST['invitation_id'])."'";
 	  //('".mysql_real_escape_string($_POST['invitation_id'])."', '".mysql_real_escape_string($_POST['password'])."', '".mysql_real_escape_string($_POST['name'])."', '".mysql_real_escape_string($_POST['subject'])."', '".mysql_real_escape_string($_POST['contents'])."', '".mysql_real_escape_string($_POST['date_regist'])."', '".mysql_real_escape_string($_POST['date_start'])."', '".mysql_real_escape_string($_POST['date_end'])."', '".mysql_real_escape_string($_POST['image'])."', '".mysql_real_escape_string($_POST['font_color'])."', '".mysql_real_escape_string($_POST['status'])."')";
 	  $result = mysql_query($sql, $connect);
-	  
+
 	  while($row = mysql_fetch_row($result)){
 		$isExistItem = true;
 		$invitation_id_from_DB = $row[0];
 		$invitation_pw_from_DB = $row[1];
 	  }
-	  
+
 	  if($isExistItem == false){
 		  echo "{result:\"error\", code: \"4002\", msg:\"유효하지 않은 초대장 주소 입니다.\"}";
 		  return;
 	  }
-	  
+
 	  if($_POST['invitation_id'] != $invitation_id_from_DB || $_POST['password'] != $invitation_pw_from_DB){
 		  echo "{result:\"error\", code: \"4003\", msg:\"초대장 주소 또는 암호가 잘못 되었습니다.\"}";
 		  return;
@@ -122,7 +122,7 @@
 		$MAX_LENGTH_SIZE_name < mb_strlen($_POST['name'], "UTF-8") ||
 		$MAX_LENGTH_SIZE_subject < mb_strlen($_POST['subject'], "UTF-8") ||
 		$MAX_LENGTH_SIZE_contents < mb_strlen($_POST['contents'], "UTF-8") ||
-		$MAX_LENGTH_SIZE_date_regist < mb_strlen($_POST['date_regist'], "UTF-8") ||
+		//$MAX_LENGTH_SIZE_date_regist < mb_strlen($_POST['date_regist'], "UTF-8") ||
 		$MAX_LENGTH_SIZE_date_start < mb_strlen($_POST['date_start'], "UTF-8") ||
 		$MAX_LENGTH_SIZE_date_end < mb_strlen($_POST['date_end'], "UTF-8") ||
 		$MAX_LENGTH_SIZE_image < mb_strlen($_POST['image'], "UTF-8") ||
@@ -135,8 +135,8 @@
 
 	  $sql = "UPDATE HP_INVITATION SET name = '".mysql_real_escape_string($_POST['name'])."', subject = '".mysql_real_escape_string($_POST['subject'])."', contents = '".mysql_real_escape_string($_POST['contents'])."', date_start = '".mysql_real_escape_string($_POST['date_start'])."',  date_end = '".mysql_real_escape_string($_POST['date_end'])."', font_color = '".mysql_real_escape_string($_POST['font_color'])."', status = '".mysql_real_escape_string($_POST['status'])."' WHERE invitation_id = '".mysql_real_escape_string($_POST['invitation_id'])."'";
 	  $result = mysql_query($sql, $connect);
-	  echo "{result:\"success\", code: \"200\", msg:\"수정 완료\"}";	  
-	
+	  echo "{result:\"success\", code: \"200\", msg:\"수정 완료\"}";
+
 
   }
 
